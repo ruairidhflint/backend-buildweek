@@ -1,5 +1,5 @@
 const express = require('express');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const db = require('./userHelpers');
 const Helpers = require('./userHelpers');
 
@@ -18,10 +18,10 @@ Router.get('/', (req, res) => {
 Router.post('/signup', (req, res) => {
   const newUserDetails = req.body;
   const { username, password } = newUserDetails;
-  //   const hashedPassword = bcrypt.hashSync(password, 12);
+  const hashedPassword = bcrypt.hashSync(password, 12);
   const newUser = {
     username,
-    password,
+    password: hashedPassword,
   };
 
   db.addNewUser(newUser)
