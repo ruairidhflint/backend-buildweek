@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('../Authentication/tokenGenerator');
 const db = require('./userHelpers');
 const Helpers = require('./userHelpers');
+const authMiddleware = require('../Authentication/restrictedRoute');
 
 const Router = express.Router();
 
@@ -48,6 +49,21 @@ Router.post('/login', (req, res) => {
     .catch((err) => {
       res.status(500).json({ err });
     });
+});
+
+Router.delete('/:id', authMiddleware.restrictedRoute, (req, res) => {
+  const { id } = req.params;
+  if (Number(id) === req.decodedToken.id) {
+    db.deleteUser(id)
+      .then(() => {
+        res.status(200).json({ message: 'Successful deletion' });
+      })
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
+  } else {
+    res.status(400).json({ message: 'Invalid permissions' });
+  }
 });
 
 module.exports = Router;
