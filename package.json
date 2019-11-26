@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watchAll -i",
+    "test": "cross-env DB_ENV=testing jest --watchAll",
     "start": "node index.js"
   },
   "repository": {

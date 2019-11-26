@@ -12,7 +12,7 @@ const testCaseNewUser = {
     password: "1234"
 };
 
-beforeAll(async () => {
+beforeEach(async () => {
     await db('users').truncate();
     return db.seed.run();
 })
@@ -34,12 +34,7 @@ describe('[POST] new User', () => {
         const response = await request(server)
             .post('/users/signup')
             .send(testCaseNewUser);
-        expect(response.body).toStrictEqual([2]);
-    })
-
-    test('New User exists', async () => {
-        const response = await request(server).get('/users');
-        expect(response.body).toEqual([{"id": 2, "username": "Rory"}, {"id": 1, "username": "test"}])
+        expect(response.body).toStrictEqual([3]);
     })
 })
 
