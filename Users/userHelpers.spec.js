@@ -27,14 +27,22 @@ describe('User Helpers', () => {
 
     describe('POST NEW USER', () => {
         test('add new  user', async () => {
-            const users = await helpers.addNewUser({username: "tom", password: "1234"});
+            const users = await helpers.addNewUser({ username: "tom", password: "1234" });
             expect(users).toStrictEqual([2]);
         })
 
-        test('check new user exists',  async () => {
+        test('check new user exists', async () => {
             const users = await helpers.getAllUsers();
-            expect(users).toEqual([{"id": 1, "username": "test"}, {"id": 2, "username": "tom"}])
+            expect(users).toEqual([{ "id": 1, "username": "test" }, { "id": 2, "username": "tom" }])
         })
     })
+
+    describe('DELETE USER', () => {
+        test('delete new  user', async () => {
+            const users = await helpers.deleteUser(2);
+            expect(users).toBe(1);
+        })
+    })
+
 })
 

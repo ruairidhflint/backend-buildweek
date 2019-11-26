@@ -34,7 +34,7 @@ describe('[POST] new User', () => {
         const response = await request(server)
             .post('/users/signup')
             .send(testCaseNewUser);
-        expect(response.body).toStrictEqual([3]);
+        expect(response.body);
     })
 })
 
