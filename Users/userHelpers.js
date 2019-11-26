@@ -2,7 +2,7 @@ const db = require('../database/dbConfig');
 
 function getAllUsers() {
   return db('users')
-    .select('username', 'id', 'password');
+    .select('username', 'id');
 }
 
 function getUserByUsername(username) {
