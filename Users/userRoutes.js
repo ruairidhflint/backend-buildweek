@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('../Authentication/tokenGenerator');
 const db = require('./userHelpers');
 const Helpers = require('./userHelpers');
+const Middleware = require('./userMiddleware');
 const authMiddleware = require('../Authentication/restrictedRoute');
 
 const Router = express.Router();
@@ -17,7 +18,7 @@ Router.get('/', (req, res) => {
     });
 });
 
-Router.post('/signup', (req, res) => {
+Router.post('/signup', Middleware.checkAllFieldsArePresent, Middleware.checkIfUserExists, (req, res) => {
   const newUserDetails = req.body;
   const { username, password } = newUserDetails;
   const hashedPassword = bcrypt.hashSync(password, 12);
@@ -35,7 +36,7 @@ Router.post('/signup', (req, res) => {
     });
 });
 
-Router.post('/login', (req, res) => {
+Router.post('/login', Middleware.checkAllFieldsArePresent, (req, res) => {
   const { username, password } = req.body;
   db.getUserByUsername(username)
     .then((user) => {
