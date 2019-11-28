@@ -11,29 +11,38 @@ function getAllJokes() {
 
 function getJokesbyUserID(userID) {
     return db('jokes')
-      .where({ user_id: userID });
-  }
+        .where({ user_id: userID });
+}
 
-  function postNewJokeByUserID(newTab) {
+function getJokeByID(id) {
     return db('jokes')
-      .insert(newTab, 'id');
-  }
+        .where({ id })
+        .first();
+}
 
-  function deleteJokeyJokeID(id) {
+function postNewJokeByUserID(newTab) {
     return db('jokes')
-      .where({ id })
-      .del();
-  }
-  
-  function updateJokeByID(updatedJoke, id) {
+        .insert(newTab, 'id');
+}
+
+function deleteJokeByJokeID(id) {
     return db('jokes')
-      .where({ id })
-      .update(updatedJoke, 'id');
-  }
+        .where({ id })
+        .del();
+}
+
+function updateJokeByID(updatedJoke, id) {
+    return db('jokes')
+        .where({ id })
+        .update(updatedJoke, 'id');
+}
 
 module.exports = {
     getPublicJokes,
     getAllJokes,
     getJokesbyUserID,
     postNewJokeByUserID,
+    deleteJokeByJokeID,
+    updateJokeByID,
+    getJokeByID
 }

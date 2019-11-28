@@ -55,5 +55,33 @@ Router.get('/user', authMiddleware.restrictedRoute, (req, res) => {
       });
   });
 
+  Router.delete('/joke/:id', authMiddleware.restrictedRoute, checkJokeIDIsValid, (req, res) => {
+    const { id } = req.params;
+    const requiredUserID = req.userID;
+    const userID = req.decodedToken.id;
+    if (requiredUserID === userID) {
+      db.deleteJokeByJokeID(id)
+        .then(() => {
+          res.status(200).json({ message: "Success!" });
+        })
+        .catch((err) => {
+          res.status(500).json({ err, message: "Error!"});
+        });
+    } else {
+      res.status(403).json({ message: "Invalid permissions" });
+    }
+  });
+
+  async function checkJokeIDIsValid(req, res, next) {
+    const { id } = req.params;
+    const validJoke = await db.getJokeByID(id);
+    if (validJoke) {
+      req.userID = validJoke.user_id;
+      next();
+    } else {
+      res.status(400).json({ message: 'No such Joke'});
+    }
+  }
+
 
 module.exports = Router;
