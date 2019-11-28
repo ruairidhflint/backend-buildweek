@@ -73,7 +73,7 @@ Router.delete('/joke/:id', authMiddleware.restrictedRoute, middleware.checkJokeI
     }
 });
 
-Router.put('/joke/:id', authMiddleware.restrictedRoute, middleware.checkJokeIDIsValid, (req, res) => {
+Router.put('/joke/:id', authMiddleware.restrictedRoute, middleware.checkJokeIDIsValid, middleware.checkPostIsValid, (req, res) => {
     const { id } = req.params;
     const userID = req.decodedToken.id;
     const updatedJoke = {
