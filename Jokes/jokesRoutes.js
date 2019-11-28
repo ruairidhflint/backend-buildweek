@@ -24,5 +24,20 @@ Router.get('/all', authMiddleware.restrictedRoute, (req, res) => {
         })
 });
 
+Router.get('/user', authMiddleware.restrictedRoute, (req, res) => {
+    const { id } = req.decodedToken;
+    db.getJokesbyUserID(id)
+      .then((data) => {
+        if (data.length) {
+          res.status(200).json(data);
+        } else {
+          res.status(200).json("No Jokes Found!");
+        }
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  });
+
 
 module.exports = Router;

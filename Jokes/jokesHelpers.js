@@ -9,7 +9,13 @@ function getAllJokes() {
     return db('jokes');
 }
 
+function getJokesbyUserID(userID) {
+    return db('jokes')
+      .where({ user_id: userID });
+  }
+
 module.exports = {
     getPublicJokes,
     getAllJokes,
+    getJokesbyUserID,
 }
