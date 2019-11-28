@@ -40,7 +40,7 @@ Router.get('/user', authMiddleware.restrictedRoute, (req, res) => {
         });
 });
 
-Router.post('/new-joke', authMiddleware.restrictedRoute, (req, res) => {
+Router.post('/new-joke', authMiddleware.restrictedRoute, middleware.checkPostIsValid, (req, res) => {
     const { id } = req.decodedToken;
     let { joke_q, joke_a, private } = req.body;
 
