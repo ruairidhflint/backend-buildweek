@@ -14,8 +14,14 @@ function getJokesbyUserID(userID) {
       .where({ user_id: userID });
   }
 
+  function postNewJokeByUserID(newTab) {
+    return db('jokes')
+      .insert(newTab, 'id');
+  }
+
 module.exports = {
     getPublicJokes,
     getAllJokes,
     getJokesbyUserID,
+    postNewJokeByUserID,
 }

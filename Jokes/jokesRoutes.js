@@ -39,5 +39,21 @@ Router.get('/user', authMiddleware.restrictedRoute, (req, res) => {
       });
   });
 
+  Router.post('/new-joke', authMiddleware.restrictedRoute, (req, res) => {
+    const { id } = req.decodedToken;
+    let { joke_q, joke_a, private } = req.body;
+
+    const newJoke = {
+      joke_q, joke_a, private, user_id: id,
+    };
+    db.postNewJokeByUserID(newJoke)
+      .then(() => {
+        res.status(200).json({ message: 'Success', data: newJoke });
+      })
+      .catch(() => {
+        res.status(500).json({ message: 'Post failed' });
+      });
+  });
+
 
 module.exports = Router;
