@@ -19,6 +19,18 @@ function getJokesbyUserID(userID) {
       .insert(newTab, 'id');
   }
 
+  function deleteJokeyJokeID(id) {
+    return db('jokes')
+      .where({ id })
+      .del();
+  }
+  
+  function updateJokeByID(updatedJoke, id) {
+    return db('jokes')
+      .where({ id })
+      .update(updatedJoke, 'id');
+  }
+
 module.exports = {
     getPublicJokes,
     getAllJokes,
