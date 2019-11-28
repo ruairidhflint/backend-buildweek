@@ -13,8 +13,8 @@ async function checkJokeIDIsValid(req, res, next) {
 }
 
 function checkPostIsValid(req, res, next) {
-    const { joke_q, joke_a, private } = req.body;
-    if (joke_q && joke_a && private) {
+    const { joke_q, joke_a } = req.body;
+    if (joke_q && joke_a ) {
         next();
     } else {
         res.status(500).json({ message: "Please ensure all fields are present!" });
