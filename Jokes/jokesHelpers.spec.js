@@ -2,7 +2,7 @@ const db = require('../database/dbConfig');
 const helpers = require('./jokesHelpers');
 
 beforeAll(async () => {
-  await db('users').truncate();
+  await db('jokes').truncate();
   return db.seed.run();
 });
 
@@ -31,6 +31,42 @@ describe('jokes helpers testing', () => {
     test('correct joke returned', async () => {
       const joke = await helpers.getJokeByID(1);
       expect(joke.joke_q).toBe('Why did the chicken cross the road?');
+    });
+  });
+
+  describe('post new joke', () => {
+    test('posts successfully', async () => {
+      const newJoke = {
+        joke_q: 'Q testing',
+        joke_a: 'A testing',
+        privated: 0,
+        user_id: 1,
+      };
+      const postJoke = await helpers.postNewJokeByUserID(newJoke);
+
+      expect(postJoke).toStrictEqual([4]);
+    });
+  });
+
+  describe('update joke', () => {
+    test('updates successfully', async () => {
+      const updateJoke = {
+        joke_q: 'Q updates',
+        joke_a: 'A updates',
+        privated: 0,
+        user_id: 1,
+      };
+      const updatedJoke = await helpers.updateJokeByID(updateJoke, 1);
+
+      expect(updatedJoke).toBe(1);
+    });
+  });
+
+  describe('delete joke', () => {
+    test('deletes joke successfully', async () => {
+      const deleted = await helpers.deleteJokeByJokeID(4);
+
+      expect(deleted).toBe(1);
     });
   });
 });

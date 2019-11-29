@@ -20,9 +20,9 @@ function getJokeByID(id) {
     .first();
 }
 
-function postNewJokeByUserID(newTab) {
+function postNewJokeByUserID(newJoke) {
   return db('jokes')
-    .insert(newTab, 'id');
+    .insert(newJoke, 'id');
 }
 
 function deleteJokeByJokeID(id) {
