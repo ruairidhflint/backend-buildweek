@@ -13,7 +13,7 @@ server.use('/users', UserRoutes);
 server.use('/jokes', JokeRoutes);
 
 server.get('/', (req, res) => {
-  res.status(200).json({ API: 'Working' });
+  res.status(200).json({ API: 'Working', DATABASE: process.env.DB_ENV });
 });
 
 module.exports = server;
