@@ -99,7 +99,6 @@ This documentation references the Postgres Hosting that will persist data. If yo
 > The jokes will come back in array:
 >
 > ```json
-> [
     {
         "id": 1,
         "joke_q": "Why did the chicken cross the road?",
@@ -121,7 +120,6 @@ This documentation references the Postgres Hosting that will persist data. If yo
         "privated": false,
         "user_id": 1
     }
-]
 > ```
 >
 > If there are currentlly no jokes saved to that user's account, the response will return:
