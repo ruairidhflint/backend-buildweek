@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ruairidhflint/backend-buildweek#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "cors": "^2.8.5",
     "cross-env": "^6.0.3",
     "dotenv": "^8.2.0",
